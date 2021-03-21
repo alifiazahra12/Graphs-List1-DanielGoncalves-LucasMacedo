@@ -7,79 +7,63 @@
 | Daniel Maike Mendes Gonçalves  | 16/0117003  | [DanMke](https://github.com/DanMke) | danmke@hotmail.com |
 | Lucas Pereira de Andrade Macêdo  | 15/0137397  | [lukassxp](https://github.com/lukassxp) | lpalucas.10@gmail.com |
 
-## Installation
+## Cara Instalasi
+Ke command prompt kemudian jalankan pip3 install -r requirements.txt --user
+dan eksekusi menggunakan python3 graph-list1.py
 
-> * ``` git clone https://github.com/projeto-de-algoritmos/Graphs-List1-DanielGoncalves-LucasMacedo.git ``` <br> <br>
-> * ``` pip3 install -r requirements.txt --user ```
+## Penjelasan game Maze
 
-## Execution
+<p align="justify"> Game ini atau dalam bahasa indonesianya adalah labirin merupakan game dimana berisi kumpulan jalur acak, pengguna harus menemukan jalan dari pintu masuk ke goal. Ini termasuk ke dalam game teka-teki tur yang bercabang di mana pemain harus menemukan rute yang benar,
+dan untuk menyederhanakan pola non-percabangan yang mengarah secara jelas melalui tata letak yang berbelit-belit ke tujuan. </p>
 
-> * ``` python3 graph-list1.py ```
+### Pembuatan Maze/Labirin
 
-## About Maze
+<p align="justify"> Ada banyak langkah dan algoritma yang dapat digunakan untuk membuat labirin. Dengan merancang tata letak lorong serta dinding pada labirin. Disini tersedia dua mekanisme utama dari pembuatan labirinnya sendiri yaitu "lintasan yang mengukir" serta "menambahkan dinding". </p>
 
-<p align="justify"> A maze is a path or collection of paths, typically from an entrance to a goal. 
-The word is used to refer both to branching tour puzzles through which the solver must find a route, 
-and to simpler non-branching patterns that lead unambiguously through a convoluted layout to a goal. </p>
+### Memecahkan Puzzle Labirin
 
-### Generating Mazes
+<p align="justify"> Memecahkan labirin berarti pemain harus menemukan rute dari pintu masuk menuju goal dari awal hingga akhir. Banyak metode yang dapat digunakan untuk memecahkan labirin. Labirin juga terbagi menjadi beberapa kategori salah satunya adalah labirin yang tidak memiliki loop (labirin standar). </p>
 
-<p align="justify"> Maze generation is the act of designing the layout of passages and walls within a maze. 
-There are many different approaches to generating mazes, with various maze generation algorithms for building them, 
-either by hand or automatically by computer.
-There are two main mechanisms used to generate mazes. 
-In "carving passages", one marks out the network of available routes. In building a maze by "adding walls", 
-one lays out a set of obstructions within an open area. Most mazes drawn on paper are done by drawing the walls, 
-with the spaces in between the markings composing the passages. </p>
-
-### Solving Mazes
-
-<p align="justify"> Maze solving is the act of finding a route through the maze from the start to finish. 
-Some maze solving methods are designed to be used inside the maze by a traveler with no prior knowledge of the maze, 
-whereas others are designed to be used by a person or computer program that can see the whole maze at once.
-The mathematician Leonhard Euler was one of the first to analyze plane mazes mathematically, 
-and in doing so made the first significant contributions to the branch of mathematics known as topology.
-Mazes containing no loops are known as "standard", or "perfect" mazes, and are equivalent to a tree in graph theory. 
-Thus many maze solving algorithms are closely related to graph theory. Intuitively, 
-if one pulled and stretched out the paths in the maze in the proper way, the result could be made to resemble a tree. </p>
-
-## Maze Adventures
+## Maze Adventure
 
 ### Maze generation algorithm
+<p align="justify"> Pembuatan labirin ini menggunakan dua algoritma yang familiar di telinga kita yaitu Depth-First Search dan Breadth-First Search. </p>
+<p align="justify"> Algoritma DFS merupakan algoritma yang secara terurut atau teratur dimulai dari urutan terakhir. Terbalik dengan BFS, ia akan melewati semua kemungkinan yang ada dari titik terakhir kemudian baru lah berpindah ke titik awal sebelumnya sampai ke titik pertama. Ini merupakan metode menjelajahi suatu pohon atau pun labirin. Ia akan menjelajahi rute jika goalnya tidak ada di rute tersebut maka akan kembali ke rute sebelumnya dan mencoba rute lain. </p>
+<p align="justify"> Sedangkan algoritma BFS merupakan algoritma yang biasanya digunakan untuk mencari rute sederhana melalui semua titiknya. Dimulai dari titik awal, kemudian lanjut ke titik cabang secara terurut. Jika belum ditemukan maka perhitungan diulang lagi dari masing-masing titik cabang sampai akhirnya goal ditemukan. </p>
 
-#### Recursive backtracker using Depth-First Search
+#### Pelacak mundur menggunakan Depth-First Search
 
-- 1. Make the initial cell the current cell and mark it as visited <br>
-- 2. While there are unvisited cells <br>
-    - 1. If the current cell has any neighbours which have not been visited <br>
-        - 1. Choose randomly one of the unvisited neighbours <br>
-        - 2. Push the current cell to the stack <br>
-        - 3. Remove the wall between the current cell and the chosen cell <br>
-        - 4. Make the chosen cell the current cell and mark it as visited <br>
-    - 2. Else if stack is not empty <br>
-        - 1. Pop a cell from the stack <br>
-        - 2. Make it the current cell <br>
+- 1. Buat sel awal menjadi sel saat ini dan tandai sebagai telah dikunjungi. (Menandai rute yang telah dilewati) <br> 
+- 2. Meskipun ada rute yang belum dilewati <br>
+     - 1. Jika rute saat ini memiliki rute berdekatan yang belum dikunjungi <br>
+         - 1. Pilih secara acak salah satu rute terdekat yang belum dikunjungi <br>
+         - 2. Dorong rute saat ini ke tumpukan <br>
+         - 3. Lepaskan dinding antara rute saat ini dan rute yang dipilih <br>
+         - 4. Jadikan rute yang dipilih sebagai rute saat ini dan tandai sebagai telah dikunjungi <br>
+     - 2. Lain jika tumpukan tidak kosong <br>
+         - 1. Keluarkan rute dari tumpukan <br>
+         - 2. Jadikan itu rute saat ini <br>
 
 <br> ![generate-maze](gifs/generate_maze.gif) <br>
 
-### Maze solving algorithm
+### Algoritma pemecah labirin
 
 #### Breadth-First Search
 
-- 1. Define an initial node, marking as exploited <br>
-- 2. Add it to the queue <br>
-- 3. While the queue is not empty and you have not found the end of the maze <br>
-      - 1. Remove the first node from the queue, **U** <br>
-      - 2. For each neighbor **V** of **U** <br>
-        - 1. If you have not explored <br>
-            - 1. Mark **U** as the parent of **V** <br>
-            - 2. Mark **V** as explored <br>
-            - 3. Put **V** at the end of the queue. <br>
-            - 4. If **V** is the end of the maze <br>
-                - 1. The end was found <br>
-- 4. Define the current node as the end of the maze <br>
-- 5. While the father of the node's parent is not empty <br>
-    - 1. Assign the current node as your parent, to walk the way back <br>
+- 1. Tentukan node awal, tandai sebagai dieksploitasi <br>
+- 2. Tambahkan ke antrian <br>
+- 3. Sementara antrian tidak kosong dan Anda belum menemukan ujung labirin <br>
+       - 1. Hapus node pertama dari antrian, ** U ** <br>
+       - 2. Untuk setiap tetangga ** V ** dari ** U ** <br>
+         - 1. Jika Anda belum menjelajahi <br>
+             - 1. Tandai ** U ** sebagai induk dari ** V ** <br>
+             - 2. Tandai ** V ** sebagai dieksplorasi <br>
+             - 3. Letakkan ** V ** di akhir antrian. <br>
+             - 4. Jika ** V ** adalah ujung labirin <br>
+                 - 1. Akhir ditemukan <br>
+- 4. Tentukan node saat ini sebagai ujung labirin <br>
+- 5. Sedangkan ayah dari node induk tidak kosong <br>
+     - 1. Tetapkan simpul saat ini sebagai orang tuamu, untuk berjalan kembali <br>
        
 <br> ![solving-maze](gifs/solving_maze.gif) <br>
 
